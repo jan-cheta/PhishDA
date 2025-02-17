@@ -1,0 +1,182 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    color: white;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Main Section */
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+.tool-interface {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.input-section textarea {
+    width: 80%; /* Spans 80% of the container */
+    height: 150px; /* Height for multiple lines */
+    padding: 15px;
+    margin: 10px auto;
+    font-size: 0.8rem; /* Larger font size for readability */
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    resize: none; /* Optional: Prevent resizing by the user */
+}
+
+.input-section button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-section button:hover {
+    background-color: gray;
+    color: black;
+}
+
+.input-section .upload-section {
+    margin-top: 20px;
+}
+
+.input-section .upload-section input {
+    font-size: 1rem;
+}
+
+/* Features Section */
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+/* How It Works */
+.steps {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.step {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+/* Tips */
+.tips-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.tip {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+/* Footer */
+footer {
+    background-color: #000000;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer .socials {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer .socials li a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #6793ba;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+.result-section h3 {
+    font-size: 1.5rem;
+    color: #0047ab;
+}
+
+.result-section p {
+    font-size: 1rem;
+    color: #333;
+}

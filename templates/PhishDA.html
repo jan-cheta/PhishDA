@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishDA: Phishing Detection AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='PhishDA.css')}}">
+    <style>
+     
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='phishing.png')}}" alt="Logo">
+            <h1>PhishDA</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#tips">Tips</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main id="home">
+        <section class="tool-interface">
+            <h2>Check if an Email is Safe</h2>
+            <p>Paste the email content to analyze potential threats.</p>
+
+            <div class="input-section">
+                <!-- URL Checker -->
+                <textarea class="email-input" placeholder="Paste the email here..."></textarea>
+                <div class="button-group">
+                    <button id="paste-button">Paste</button>
+                    <button id="analyze-button">Analyze</button>
+                </div>
+            </div>
+
+            <!-- Result Section -->
+            <div class="result-section" id="result">
+                <h3 id="analysis">Analysis Result:</h3>
+                <p id="result-text">Your analysis result will appear here.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <h2>Why Use PhishDA?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>AI-Powered Detection</h3>
+                    <p>Advanced algorithms to identify malicious content.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-Time Analysis</h3>
+                    <p>Get instant results and actionable insights.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Privacy Guaranteed</h3>
+                    <p>Your data is never stored or shared.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <h3>Step 1</h3>
+                    <p>Paste a suspicious email.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 2</h3>
+                    <p>Our AI scans for red flags (malicious domains, phishing tactics).</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3</h3>
+                    <p>Receive a result of the email.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips -->
+        <section id="tips">
+            <h2>Tips to Stay Safe Online</h2>
+            <div class="tips-grid">
+                <div class="tip">
+                    <h3>Verify URLs</h3>
+                    <p>Always check the URL before clicking.</p>
+                </div>
+                <div class="tip">
+                    <h3>Look for HTTPS</h3>
+                    <p>Secure sites have HTTPS in their URLs.</p>
+                </div>
+                <div class="tip">
+                    <h3>Beware of Urgent Language</h3>
+                    <p>Phishing emails often try to rush you into action.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 PhishDA. All rights reserved.</p>
+        <p>Created by John Cedrick Acuña, Jan Ryan Ancheta, Kyzren Pamatmat, and Rafael Espiña</p>
+        <p>BS Computer Science - Adamson University</p>
+    </footer>
+
+    <!-- JavaScript for Dynamic Results -->
+    <script>
+        document.querySelector("#analyze-button").addEventListener("click", () => {
+            const textareaValue = document.querySelector(".input-section textarea").value;
+            const resultSection = document.getElementById("result");
+            const resultTextElement = document.getElementById("result-text");
+            const analysisText = document.getElementById("analysis")
+    
+            if (!textareaValue.trim()) {
+                alert("Please enter some text to analyze.");
+                return;
+            }
+    
+            fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                body: JSON.stringify({ body: textareaValue }),
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                let resultText;
+    
+                if (json.error) {
+                    resultText = `Error: ${json.error}`;
+                } else {
+                   if(json.body <= 0){
+                        resultText = `The email or text is predicted as SAFE`;
+                        resultSection.style.backgroundColor = '#6793ba';
+                        analysisText.style.color = '#0047ab';
+                    }else{
+                        resultText = `The email or text is predicted as PHISHING`;
+                        resultSection.style.backgroundColor = '#CD5C5C';
+                        analysisText.style.color = '#65000B';
+                    }
+                }
+    
+                // Display result
+                
+    
+                resultTextElement.textContent = resultText;
+                resultSection.style.display = "block";
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while analyzing the email.');
+            });
+        });
+
+        document.querySelector(".email-input").addEventListener("input", () => {
+        const result = document.getElementById('result');
+        result.style.display = 'none';
+        })
+
+        document.getElementById("paste-button").addEventListener("click", () => {
+            navigator.clipboard.readText().then(text => {
+                document.querySelector(".input-section textarea").value = text;
+            }).catch(err => {
+                alert("Failed to paste text. Make sure clipboard access is allowed.");
+            })
+        });
+    </script>
+    
+</body>
+</html>
